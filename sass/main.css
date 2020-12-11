@@ -40,7 +40,6 @@ html {
 .page .header form .todo-input {
   width: 100%;
   border: none;
-  color: #fff;
   padding: 0.8rem;
   font-size: 1.5rem;
   border-top-left-radius: 0.4rem;
@@ -78,11 +77,11 @@ html {
   margin-bottom: 0.2rem;
   height: 7vh;
   border-bottom: 1px solid #777a92;
+  cursor: move;
 }
 .page .footer .todo-container .todo-list .todo-div .todo-li {
   flex: 0.8;
   list-style-type: none;
-  color: #cacde8;
   font-size: 1rem;
   align-self: center;
 }
@@ -134,23 +133,27 @@ html {
 }
 
 .container-bg-color {
-  background-color: #393a4c;
+  background-color: #25273c;
+  color: #cacde8;
 }
 
 .light-container {
   background-color: #fff;
+  color: #4d5066;
 }
 
 .input-bg-color {
-  background-color: #393a4c;
+  background-color: #25273c;
+  color: #cacde8;
 }
 
 .light-input {
   background-color: #fff;
+  color: #4d5066;
 }
 
 .button-bg-color {
-  background-color: #393a4c;
+  background-color: #25273c;
 }
 
 .light-button {
@@ -185,6 +188,30 @@ html {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #e4e5f1;
+}
+
+#filter-section {
+  border-bottom: none;
+  color: #4d5066;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  cursor: initial;
+}
+#filter-section ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: none;
+  align-items: none;
+  list-style: none;
+}
+#filter-section ul li {
+  margin: 0 0.7rem;
+  cursor: pointer;
+}
+#filter-section ul li:hover {
+  color: #3a7bfd;
 }
 
 /*# sourceMappingURL=main.css.map */

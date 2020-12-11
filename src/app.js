@@ -4,6 +4,8 @@ const todoContainer = document.querySelector(".todo-container");
 const todoSubmit = document.querySelector(".todo-button");
 const todoList = document.querySelector(".todo-list");
 const todoIcon = document.querySelector(".todo-icon");
+const todoFilter = document.querySelector(".todo-filter");
+const todoNumber = document.querySelector(".item-number");
 
 // Functions
 function changeTheme(e) {
@@ -78,6 +80,7 @@ function addList(e) {
   // Make item div
   const todoDiv = document.createElement("div");
   todoDiv.classList.add("todo-div");
+  //todoDiv.setAttribute("draggable", "true");
 
   // Make List item
   const listItem = document.createElement("li");
@@ -97,8 +100,9 @@ function addList(e) {
   todoDiv.appendChild(completeButton);
   todoDiv.appendChild(listItem);
   todoDiv.appendChild(trashButton);
-  //todoList.insertBefore(todoDiv, todoList.childNodes[0]);
-  todoList.appendChild(todoDiv);
+  todoList.insertBefore(todoDiv, todoList.childNodes[0]);
+  // Total in list
+  todoNumber.innerText = todoList.children.length - 1;
   // Clear input
   todoInput.value = "";
 }
@@ -116,6 +120,34 @@ function removeList(e) {
   if (item.classList.contains("complete-btn")) {
     item.parentElement.classList.toggle("check");
   }
+}
+
+function filterList(e) {
+  const list = todoList.childNodes;
+
+  list.forEach((item) => {
+    const target = e.target;
+    switch (target.classList[0]) {
+      case "all":
+        item.style.display = "flex";
+        break;
+      case "active":
+        const all = document.querySelector(".all");
+        if (!item.classList.contains("check")) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+        break;
+      case "completed":
+        if (item.classList.contains("check")) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+        break;
+    }
+  });
 }
 
 function saveToLocal(todo) {
@@ -152,8 +184,9 @@ function getLocal() {
     todoDiv.appendChild(completeButton);
     todoDiv.appendChild(listItem);
     todoDiv.appendChild(trashButton);
-    //todoList.insertBefore(todoDiv, todoList.childNodes[0]);
-    todoList.appendChild(todoDiv);
+    todoList.insertBefore(todoDiv, todoList.childNodes[0]);
+    //todoList.appendChild(todoDiv);
+    todoNumber.innerText = todos.length;
   });
 }
 
@@ -168,6 +201,7 @@ function removeLocal(todo) {
   const itemIndex = todo.children[0].innerText;
   todos.splice(todos.indexOf(itemIndex), 1);
   localStorage.setItem("list", JSON.stringify(todos));
+  todoNumber.innerText = todos.length;
 }
 
 // EventListeners
@@ -175,3 +209,4 @@ todoSubmit.addEventListener("click", addList);
 todoList.addEventListener("click", removeList);
 document.addEventListener("DOMContentLoaded", getLocal);
 todoIcon.addEventListener("click", changeTheme);
+todoFilter.addEventListener("click", filterList);
